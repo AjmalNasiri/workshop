@@ -15,6 +15,13 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
+            $table->string('VINNumber',17);
+            $table->string('palet')->nullable();
+            $table->string('name');
+            $table->string('model');
+            $table->string('brand');
+            $table->string('color');
+            $table->string('engineNumber');
             $table->timestamps();
         });
     }

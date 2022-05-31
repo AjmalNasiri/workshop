@@ -15,6 +15,9 @@ class CreateQataasTable extends Migration
     {
         Schema::create('qataas', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('province');
+            $table->string('district');
             $table->timestamps();
         });
     }

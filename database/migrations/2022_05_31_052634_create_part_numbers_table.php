@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\Part;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCodrsTable extends Migration
+class CreatePartNumbersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +14,10 @@ class CreateCodrsTable extends Migration
      */
     public function up()
     {
-        Schema::create('codrs', function (Blueprint $table) {
+        Schema::create('part_numbers', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Part::class)->constrained();
+            $table->string('part_number')->unique();
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ class CreateCodrsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('codrs');
+        Schema::dropIfExists('part_numbers');
     }
 }

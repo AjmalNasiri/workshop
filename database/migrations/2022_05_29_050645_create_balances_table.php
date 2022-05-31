@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Part;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +16,8 @@ class CreateBalancesTable extends Migration
     {
         Schema::create('balances', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Part::class)->constrained();
+            $table->integer('qty');
             $table->timestamps();
         });
     }
@@ -26,6 +29,9 @@ class CreateBalancesTable extends Migration
      */
     public function down()
     {
+        Schema::table('balances',function(Blueprint $table){
+            $table->dropForeign(['part_id']);
+        });
         Schema::dropIfExists('balances');
     }
 }

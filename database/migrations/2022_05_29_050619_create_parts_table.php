@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Block;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +16,9 @@ class CreatePartsTable extends Migration
     {
         Schema::create('parts', function (Blueprint $table) {
             $table->id();
+            $table->string('part_name');
+            $table->string('car_type');
+            $table->foreignIdFor(Block::class)->constrained();
             $table->timestamps();
         });
     }
@@ -26,6 +30,9 @@ class CreatePartsTable extends Migration
      */
     public function down()
     {
+        Schema::table('parts',function(Blueprint $table){
+            $table->dropForeign(['block_id']);
+        });
         Schema::dropIfExists('parts');
     }
 }

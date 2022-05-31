@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\CarCodr;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRepCorFaultsTable extends Migration
+class CreateSetHolderAndDriversTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +13,11 @@ class CreateRepCorFaultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('rep_cor_faults', function (Blueprint $table) {
+        Schema::create('set_holder_and_drivers', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
+            $table->string('name');
+            $table->string('contactNumber',15);
             $table->boolean('type');
-            $table->foreignIdFor(CarCodr::class)->constrained();
             $table->timestamps();
         });
     }
@@ -30,9 +29,6 @@ class CreateRepCorFaultsTable extends Migration
      */
     public function down()
     {
-        Schema::table('rep_cor_faults',function(Blueprint $table){
-            $table->dropForeign(['car_codr_id']);
-        });
-        Schema::dropIfExists('rep_cor_faults');
+        Schema::dropIfExists('set_holder_and_drivers');
     }
 }
